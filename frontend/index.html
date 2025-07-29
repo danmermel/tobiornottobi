@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vuetify@3.7.19/dist/vuetify.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css" />
+  <link rel="stylesheet" href="https://fonts.bunny.net/css?family=roboto:400,500,700" />
+  <script type="importmap">
+    {
+      "imports": {
+        "vue": "https://cdn.jsdelivr.net/npm/vue@3.5.13/dist/vue.esm-browser.js",
+        "vuetify": "https://cdn.jsdelivr.net/npm/vuetify@3.7.19/dist/vuetify.esm.js"
+      }
+    }
+    </script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+  <title>To BI or Not to BI</title>
+  <!-- <link rel="manifest" href="anagram.webmanifest" /> -->
+</head>
+
+<body>
+  <v-layout v-cloak id="app">
+    <v-app theme="light">
+      <v-app-bar density="compact" color="#009688">
+        <v-app-bar-title style="user-select:none;">To BI or not to BI</v-app-bar-title>
+      </v-app-bar>
+      <v-main>
+        <v-carousel hide-delimiters>
+          <v-carousel-item v-for="(item, index) in items" :key="index">
+            <v-img :src="item.image" height="400px"></v-img>
+            <v-container>
+              <v-row justify="center">
+                <v-btn @click="vote(item.id, 'up')" color="green">👍</v-btn>
+                <v-btn @click="vote(item.id, 'down')" color="red">👎</v-btn>
+              </v-row>
+            </v-container>
+          </v-carousel-item>
+        </v-carousel>
+      </v-main>
+    </v-app>
+  </v-layout>
+
+  <script type="module">
+    // imports
+    import { createApp, ref} from "vue"
+    import { createVuetify } from "vuetify"
+
+    // use vuetify for UI
+    const vuetify = createVuetify()
+
+    // create Vue.js app
+    createApp({
+
+
+      setup() {
+        // app state
+        const items = ref([
+          { id: 1, image: '/home/daniel/Downloads/CarinaPrice.jpg' },
+          { id: 2, image: 'https://cdn.vuetifyjs.com/images/cards/hotel.jpg' },
+          { id: 3, image: 'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg' },
+        ])
+
+        function vote (itemid, direction) {
+          console.log(itemid, direction)
+        }
+
+        // make state available
+        return {
+          vote,
+          items
+        }
+      }
+    }).use(vuetify).mount('#app')
+
+  </script>
+</body>
+
+</html>
