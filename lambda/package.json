@@ -1,0 +1,15 @@
+{
+  "name": "tobiornottobi",
+  "version": "1.0.0",
+  "description": "Basic Income quiz",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.891.0",
+    "kuuid": "^1.0.3"
+  }
+}

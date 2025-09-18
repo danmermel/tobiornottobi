@@ -1,0 +1,10 @@
+node_modules
+lambda.zip
+crash.log
+todo.txt
+test.js
+*.zip
+.terraform
+terraform.tfvars
+terraform.tfstate
+terraform/terraform.tfstate.backup
