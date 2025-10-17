@@ -14,6 +14,9 @@ resource "aws_lambda_function" "tobiLambda" {
   timeout          = var.timeout
   source_code_hash = data.archive_file.lambda.output_base64sha256
   layers           = [var.nodeLayer]
+  environment {
+    variables = var.env_variables
+  }
 }
 
 resource "aws_cloudwatch_log_group" "tobiLG" {

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Basic Income quiz",
   "main": "index.js",
+  "type" : "module",
   "scripts": {
     "test": "jest"
   },
@@ -10,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.891.0",
+    "@aws-sdk/lib-dynamodb": "^3.911.0",
     "kuuid": "^1.0.3"
   }
 }

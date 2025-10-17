@@ -9,3 +9,7 @@ variable "timeout" {
 }
 
 variable "nodeLayer" {}
+
+variable "env_variables" {
+  default = {}
+}
