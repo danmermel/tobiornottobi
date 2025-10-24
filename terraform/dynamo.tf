@@ -14,5 +14,23 @@ resource "aws_dynamodb_table" "tobiDb" {
     name = "sk"
     type = "S"
   }
+
+    attribute {
+    name = "GSI1PK"
+    type = "S"
+  }
+
+  attribute {
+    name = "GSI1SK"
+    type = "S"
+  }
+
+
+  global_secondary_index {
+    name = "profile-id-index"
+    hash_key = "GSI1PK"
+    range_key = "GSI1SK"
+    projection_type = "ALL"
+  }
  
 }

@@ -42,9 +42,11 @@ export const handler = async (event) => {
     return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ "ok": false, "message": "Missing mandatory parameters in request" }) }
   }
 
-  //does the campaing exist and is still valid?
+  //does the campaing exist?
 
-  const response = await ddbDocClient.send(
+  let response
+
+  response = await ddbDocClient.send(
     new GetCommand({
       TableName: TABLE,
       Key: {
@@ -59,27 +61,48 @@ export const handler = async (event) => {
 
   //is it still valid 
   const timenow = new Date().toISOString()
-  if (timenow < response.campaignstart || timenow > response.campaignend) {
-    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ "ok": false, "message": "Campign is not currently valid" }) }
+  console.log("time now", timenow)
+  console.log("start", response.Item.campaignstart)
+  console.log("end", response.Item.campaignend)
+  if (timenow < response.Item.campaignstart || timenow > response.Item.campaignend) {
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ "ok": false, "message": "Campaign is not currently valid" }) }
   }
 
+  //does the profile exist?
 
-  console.log(response.Item)
-  return { statusCode: 200, headers: HEADERS, body: JSON.stringify({ "ok": true, "message": response.Item }) }
+  response = await ddbDocClient.send(
+    new GetCommand({
+      TableName: TABLE,
+      Key: {
+        pk: "profile",
+        sk: params.profileid
+      },
+    })
+  )
+  if (!response.Item) {
+    return { statusCode: 400, headers: HEADERS, body: JSON.stringify({ "ok": false, "message": "Invalid profileid" }) }
+  }
+
+  //if you get here, all is good and you have to write the vote.
+
+
+  response = await ddbDocClient.send(
+    new PutCommand({
+      TableName: TABLE,
+      Item: {
+        pk: `vote#${params.campaignid}`,
+        sk: `${params.profileid}#${params.userid}`,
+        campaignid: params.campaignid,
+        userid: params.userid,
+        profileid: params.profileid,
+        vote: params.votevalue,
+        timestamp: new Date().toISOString,
+        GSI1PK: `profile#${params.profileid}`,
+        GSI1SK: `user#${params.userid}`
+      },
+    })
+  );
+
+  return { statusCode: 200, headers: HEADERS, body: JSON.stringify({ "ok": true, "message": response }) }
 
 };
-
-
-
-
-
-
-// await ddbDocClient.send(
-//   new PutCommand({
-//     TableName,
-//     Item: {
-//       id: "1",
-//       content: "content from DynamoDBDocumentClient",
-//     },
-//   })
-// );
