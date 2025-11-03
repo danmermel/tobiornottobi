@@ -14,6 +14,7 @@ resource "aws_lambda_function" "tobiLambda" {
   timeout          = var.timeout
   source_code_hash = data.archive_file.lambda.output_base64sha256
   layers           = [var.nodeLayer]
+  reserved_concurrent_executions = 1
   environment {
     variables = var.env_variables
   }

@@ -8,3 +8,12 @@ test.js
 terraform.tfvars
 terraform.tfstate
 terraform/terraform.tfstate.backup
+config.json
+
+# Nuxt dev/build outputs
+.output
+.data
+.nuxt
+.nitro
+.cache
+dist
