@@ -55,6 +55,8 @@ async function next() {
   <h2>{{ profile.profilename }}</h2>
   <h3>{{ profile.profiletext }}</h3>
 
+  <!-- <img src="assets/miner.jpg"></img> -->
+
   <v-btn :disabled="disablebuttons" @click="vote(true)">Yes </v-btn>
   <v-btn :disabled="disablebuttons" @click="vote(false)"> No</v-btn>
 
