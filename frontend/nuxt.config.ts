@@ -12,6 +12,8 @@ export default defineNuxtConfig({
 
   },
 
+  modules: ["@nuxtjs/mdc"],
+
   css: [
     'vuetify/lib/styles/main.sass',
     "@mdi/font/css/materialdesignicons.css",
@@ -24,6 +26,3 @@ export default defineNuxtConfig({
   ssr: false  // static website mode ssr= server-side rendering
 
 })
-
-
-
