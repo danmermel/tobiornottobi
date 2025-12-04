@@ -1,8 +1,9 @@
 <script setup>
-import { parseMarkdown } from '@nuxtjs/mdc/runtime'
+// import { parseMarkdown } from '@nuxtjs/mdc/runtime'
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
+
 
 //fetch profiles from local storage and display the relevant one
 
@@ -16,13 +17,7 @@ const numberofprofiles = profiles.value.length
 profile.value = profiles.value[currentprofile - 1]
 console.log(profile.value)
 
-const ast = ref(null)
-
 nextprofileexists.value = currentprofile < numberofprofiles ? true : false
-ast.value = await parseMarkdown(profile.value.profiletext)
-
-console.log(ast.value)
-
 
 async function vote(v) {
   disablebuttons.value = true
@@ -42,6 +37,12 @@ async function vote(v) {
     if (!r.data.value) {
       throw new Error("Failed to register vote")
     }
+    if (!nextprofileexists.value) {
+      //reached end..go to thank you page
+        await navigateTo("/thankyou")
+
+
+    }
   }
   catch (e) {
     console.log(e)
@@ -60,31 +61,26 @@ async function next() {
 </style>
 
 <template>
-
   <v-card>
     <v-img height="200px" :src="`/assets/${profile.profileid}.jpg`" cover></v-img>
-    <v-card-title>
+    <v-card-title style="font-size: 40px;">
       {{ profile.profileheading }}
 
     </v-card-title>
-    <v-card-subtitle>
+    <v-card-subtitle style="font-size: 40px;">
       {{ profile.profilename }}
     </v-card-subtitle>
     <v-card-text>
-      <MDCRenderer v-if="ast?.body" class="markdown-body" :body="ast.body" :data="ast.data" />
+      <MDC class="markdown-body" :value="profile.profiletext" />
     </v-card-text>
     <v-card-actions>
+      <v-btn style="color:green" :disabled="disablebuttons" @click="vote(true)">Yes </v-btn>
+      <v-btn style="color:red" :disabled="disablebuttons" @click="vote(false)"> No</v-btn>
 
-      <v-btn :disabled="disablebuttons" @click="vote(true)">Yes </v-btn>
-      <v-btn :disabled="disablebuttons" @click="vote(false)"> No</v-btn>
-
-      <div v-if="disablebuttons && nextprofileexists">
-        You have voted!
+      <v-spacer></v-spacer>
+      <row v-if="disablebuttons && nextprofileexists">
         <v-btn @click="next">Next Profile</v-btn>
-      </div>
-      <div v-if="disablebuttons && !nextprofileexists">
-        Thank you! voting is done!
-      </div>
+      </row>
     </v-card-actions>
   </v-card>
   <!-- <v-img :src="`/assets/${profile.profileid}.jpg`"></v-img> -->
