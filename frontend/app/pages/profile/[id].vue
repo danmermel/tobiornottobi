@@ -61,7 +61,7 @@ async function next() {
 
 <template>
   <v-card>
-    <v-img height="200px" :src="`/assets/${profile.profileid}.jpg`" cover></v-img>
+    <v-img height="200px" :src="`assets/${profile.profileid}.jpg`" cover></v-img>
     <v-card-title style="font-size: 40px;">
       {{ profile.profileheading }}
 
