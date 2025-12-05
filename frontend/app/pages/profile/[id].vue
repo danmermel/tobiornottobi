@@ -4,7 +4,6 @@
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
 
-
 //fetch profiles from local storage and display the relevant one
 
 const profiles = ref([])
@@ -83,6 +82,4 @@ async function next() {
       </row>
     </v-card-actions>
   </v-card>
-  <!-- <v-img :src="`/assets/${profile.profileid}.jpg`"></v-img> -->
-
 </template>
