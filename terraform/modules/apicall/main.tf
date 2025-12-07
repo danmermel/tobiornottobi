@@ -1,19 +1,19 @@
 data "archive_file" "lambda" {
   source_dir  = "../lambda"
-  type     = "zip"
+  type        = "zip"
   output_path = "../lambda.zip"
-  excludes = [ "node_modules", "nodejs", "nodejs-stage.zip", "nodejs-prod.zip"]
+  excludes    = ["node_modules", "nodejs", "nodejs-stage.zip", "nodejs-prod.zip"]
 }
 
 resource "aws_lambda_function" "tobiLambda" {
-  filename         = data.archive_file.lambda.output_path
-  function_name    = "${var.function_name}-${terraform.workspace}"
-  role             = var.role
-  handler          = "${var.function_name}.handler"
-  runtime          = var.runtime
-  timeout          = var.timeout
-  source_code_hash = data.archive_file.lambda.output_base64sha256
-  layers           = [var.nodeLayer]
+  filename                       = data.archive_file.lambda.output_path
+  function_name                  = "${var.function_name}-${terraform.workspace}"
+  role                           = var.role
+  handler                        = "${var.function_name}.handler"
+  runtime                        = var.runtime
+  timeout                        = var.timeout
+  source_code_hash               = data.archive_file.lambda.output_base64sha256
+  layers                         = [var.nodeLayer]
   reserved_concurrent_executions = 1
   environment {
     variables = var.env_variables
@@ -32,10 +32,16 @@ resource "aws_lambda_function_url" "tobiFunctionUrl" {
     allow_credentials = true
     allow_origins     = ["*"]
     allow_methods     = ["*"]
-    max_age           = 86400
+    allow_headers     = ["*"]
+
+    max_age = 86400
   }
 }
 
 output "url" {
   value = aws_lambda_function_url.tobiFunctionUrl.function_url
+}
+
+output "arn" {
+  value = aws_lambda_function.tobiLambda.arn
 }
