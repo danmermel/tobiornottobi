@@ -1,6 +1,11 @@
 <script setup>
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
+const displaybutton = ref(false)
+
+async function startquiz() {
+  await navigateTo('/profile/1')
+}
 
 //running inside a timer so that the page can render before all this happens
 setTimeout(async function () {
@@ -49,9 +54,8 @@ setTimeout(async function () {
         localStorage.setItem("userid", userid)
       }
 
-      //now you have all the data.. go to first profile to start voting!
-
-      await navigateTo('/profile/1')
+      //now you have all the data.. can go to first profile to start voting!
+      displaybutton.value = true
 
     } catch (e) {
       console.error('failed to fetch campaign', e)
@@ -83,10 +87,15 @@ setTimeout(async function () {
       <v-col class="mb-4">
         <h1 class="text-h3 font-weight-bold mb-3">To BI or not to BI</h1>
 
-        <p class="subheading font-weight-regular">
+        <h2 class="subheading font-weight-regular">
+          You decide who gets a Basic Income
+        </h2>
+
+        <p v-if="!displaybutton" class="subheading font-weight-regular">
           Loading.. Please wait
           <v-progress-linear color="green" indeterminate></v-progress-linear>
         </p>
+        <v-btn v-if="displaybutton" @click="startquiz">Start the Quiz</v-btn>
       </v-col>
     </v-row>
   </v-container>

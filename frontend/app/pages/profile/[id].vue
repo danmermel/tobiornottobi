@@ -3,6 +3,7 @@
 
 const route = useRoute()
 const runtimeConfig = useRuntimeConfig()
+const { showAlert } = useShowAlert()
 
 //fetch profiles from local storage and display the relevant one
 
@@ -39,8 +40,9 @@ async function vote(v) {
     if (!nextprofileexists.value) {
       //reached end..go to thank you page
         await navigateTo("/thankyou")
-
-
+    } else {
+      showAlert("Your vote was registered", "green")
+      await navigateTo(`/profile/${currentprofile+1}`)
     }
   }
   catch (e) {
@@ -48,13 +50,8 @@ async function vote(v) {
 
   }
 }
-
-
-async function next() {
-  await navigateTo(`/profile/${currentprofile + 1}`)
-}
-
 </script>
+
 <style>
 @import url("~/assets/markdown.css");
 </style>
@@ -75,11 +72,6 @@ async function next() {
     <v-card-actions>
       <v-btn style="color:green" :disabled="disablebuttons" @click="vote(true)">Yes </v-btn>
       <v-btn style="color:red" :disabled="disablebuttons" @click="vote(false)"> No</v-btn>
-
-      <v-spacer></v-spacer>
-      <row v-if="disablebuttons && nextprofileexists">
-        <v-btn @click="next">Next Profile</v-btn>
-      </row>
     </v-card-actions>
   </v-card>
 </template>
