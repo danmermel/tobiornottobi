@@ -91,11 +91,11 @@ setTimeout(async function () {
           You decide who gets a Basic Income
         </h2>
 
-        <p v-if="!displaybutton" class="subheading font-weight-regular">
+        <p v-if="!displaybutton" class="subheading pt-4 font-weight-regular">
           Loading.. Please wait
           <v-progress-linear color="green" indeterminate></v-progress-linear>
         </p>
-        <v-btn v-if="displaybutton" @click="startquiz">Start the Quiz</v-btn>
+        <v-btn class="mt-4" v-if="displaybutton" @click="startquiz">Start the Quiz</v-btn>
       </v-col>
     </v-row>
   </v-container>

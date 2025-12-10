@@ -39,10 +39,10 @@ async function vote(v) {
     }
     if (!nextprofileexists.value) {
       //reached end..go to thank you page
-        await navigateTo("/thankyou")
+      await navigateTo("/thankyou")
     } else {
       showAlert("Your vote was registered", "green")
-      await navigateTo(`/profile/${currentprofile+1}`)
+      await navigateTo(`/profile/${currentprofile + 1}`)
     }
   }
   catch (e) {
@@ -57,6 +57,16 @@ async function vote(v) {
 </style>
 
 <template>
+<div class="pb-2">
+  <v-progress-linear 
+  :model-value="100/numberofprofiles*currentprofile"
+  height="25"
+  color="cyan"
+  >
+  <small class="text-black">{{ currentprofile }}/{{ numberofprofiles }}</small>
+  </v-progress-linear>
+</div>
+
   <v-card>
     <v-img height="200px" :src="`../assets/${profile.profileid}.jpg`" cover></v-img>
     <v-card-title style="font-size: 40px;">
