@@ -59,11 +59,11 @@ async function vote(v) {
 <template>
 <div class="pb-2">
   <v-progress-linear 
-  :model-value="100/numberofprofiles*currentprofile"
+  :model-value="100/numberofprofiles*(currentprofile-1)"
   height="25"
   color="cyan"
   >
-  <small class="text-black">{{ currentprofile }}/{{ numberofprofiles }}</small>
+  <small class="text-black">{{ currentprofile -1}}/{{ numberofprofiles }} votes cast</small>
   </v-progress-linear>
 </div>
 

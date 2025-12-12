@@ -1,6 +1,10 @@
 <template>
   <v-container>
-
+    <div class="pb-2">
+      <v-progress-linear model-value="100" height="25" color="cyan">
+        <small class="text-black">All votes cast</small>
+      </v-progress-linear>
+    </div>
     <v-row class="text-center">
       <v-col cols="6">
         <img src="/assets/miner.jpg" class="my-3" contain height="200" />
