@@ -79,9 +79,9 @@ async function vote(v) {
     <v-card-text>
       <MDC class="markdown-body" :value="profile.profiletext" />
     </v-card-text>
-    <v-card-actions>
-      <v-btn style="color:green" :disabled="disablebuttons" @click="vote(true)">Yes </v-btn>
-      <v-btn style="color:red" :disabled="disablebuttons" @click="vote(false)"> No</v-btn>
+    <v-card-actions class="justify-center">
+      <v-btn size="x-large" style="color:green" :disabled="disablebuttons" @click="vote(true)">Yes </v-btn>
+      <v-btn size="x-large" style="color:red" :disabled="disablebuttons" @click="vote(false)"> No</v-btn>
     </v-card-actions>
   </v-card>
 </template>
