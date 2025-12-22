@@ -90,6 +90,18 @@ setTimeout(async function () {
         <h2 class="subheading font-weight-regular">
           You decide who gets a Basic Income
         </h2>
+        <v-expansion-panels variant="popout">
+          <v-expansion-panel>
+            <v-expansion-panel-title>
+              What is a Basic Income?
+            </v-expansion-panel-title>
+            <v-expansion-panel-text class="text-left">
+              The idea of a Basic Income is that every individual in society should get a regular (weekly or monthly),
+              unconditional cash payment as a right of citizenship. What do you think? Is everyone "deserving" of a
+              Basic Income? Take our quiz to find out!
+            </v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
 
         <p v-if="!displaybutton" class="subheading pt-4 font-weight-regular">
           Loading.. Please wait

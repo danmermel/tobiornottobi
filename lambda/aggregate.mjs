@@ -90,5 +90,69 @@ export const handler = async (event) => {
         Item: item
       })
     )
+
+  /// Now doing the same but for the total aggregation per profile
+
+ // Now try to load the row
+
+    params = {
+      TableName: TABLE,
+      Key: {
+        pk,
+        sk: "total"
+      }
+    };
+
+    // console.log(params)
+
+    row = await ddbDocClient.send(
+      new GetCommand(params)
+    )
+
+    // console.log("This is the row: ", row.Item)
+
+    if (!row.Item) {
+      //the agg row does not yet exist.. create it
+      item = {
+        pk,
+        sk: "total",
+        yes: 0,
+        no: 0
+      }
+    } else {
+      item = row.Item
+    }
+
+    // console.log("The item is ", item)
+    // if there is a newimage add one to whatever was chosen
+
+    if (newimage) {
+      // console.log("new image exists and vote is ", newimage.vote.BOOL )
+      if (newimage.vote.BOOL) {
+        item.yes++
+      } else {
+        item.no++
+      }
+    }
+    //if there is an oldimage subtract one from what was in the old image
+
+    if (oldimage) {
+      // console.log("old image exists and vote is ", oldimage.vote.BOOL )
+      if (oldimage.vote.BOOL) {
+        item.yes--
+      } else {
+        item.no--
+      }
+    }
+
+    //write the row back 
+    // console.log("We are about to write this: ", item)
+
+    await ddbDocClient.send(
+      new PutCommand({
+        TableName: TABLE,
+        Item: item
+      })
+    )
   }
 };
