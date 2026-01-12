@@ -76,7 +76,7 @@ setTimeout(async function () {
 
     <v-row class="text-center">
       <v-col cols="6">
-        <img src="/assets/student.jpg" class="my-3" contain height="200" />
+        <img src="/assets/studentport.jpg" class="my-3" contain height="200" />
       </v-col>
       <v-col cols="6">
         <img src="/assets/farmer.jpg" class="my-3" contain height="200" />
