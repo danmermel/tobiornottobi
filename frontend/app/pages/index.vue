@@ -33,7 +33,7 @@ setTimeout(async function () {
           method: 'post'
         })
 
-      console.log(r.data.value)
+      // console.log(r.data.value)
       if (r.data.value.message.length === 0) {
         //no profiles
         throw new Error("No profiles available")

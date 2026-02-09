@@ -22,7 +22,7 @@ const client = new DynamoDBClient({});
 const ddbDocClient = DynamoDBDocumentClient.from(client); // client is DynamoDB client
 
 const TABLE = process.env.TABLE
-console.log("table is ", TABLE)
+//console.log("table is ", TABLE)
 
 const HEADERS = { "Content-type": "application/json" }
 

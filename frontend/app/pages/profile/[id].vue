@@ -15,13 +15,13 @@ profiles.value = JSON.parse(localStorage.getItem("profiles"))
 const currentprofile = parseInt(route.params.id)
 const numberofprofiles = profiles.value.length
 profile.value = profiles.value[currentprofile - 1]
-console.log(profile.value)
+// console.log(profile.value)
 
 nextprofileexists.value = currentprofile < numberofprofiles ? true : false
 
 async function vote(v) {
   disablebuttons.value = true
-  console.log(v)
+  //console.log(v)
   try {
 
     const r = await useFetch(runtimeConfig.public.writeVoteFunctionUrl.value,
