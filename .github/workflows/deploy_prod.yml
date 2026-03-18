@@ -24,12 +24,19 @@ jobs:
         with:
           terraform_wrapper: false
           terraform_version: 1.13.4 
-      # Build API Layer
+      # Build API Layer and get latest results
       - name: Build API Layer
         run: |
           cd scripts
           ./build_layer.sh prod
-
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"miner" }, ":sk":{"S":"total"}}' > ../frontend/miner.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"millionaire" }, ":sk":{"S":"total"}}' > ../frontend/millionaire.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"carer" }, ":sk":{"S":"total"}}' > ../frontend/carer.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"careleaver" }, ":sk":{"S":"total"}}' > ../frontend/careleaver.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"farmer" }, ":sk":{"S":"total"}}' > ../frontend/farmer.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"student" }, ":sk":{"S":"total"}}' > ../frontend/student.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"refugee" }, ":sk":{"S":"total"}}' > ../frontend/refugee.json
+          aws dynamodb query --table-name tobiagg-prod --key-condition-expression 'pk=:pk1 AND sk=:sk' --expression-attribute-values '{":pk1":{"S":"disabled" }, ":sk":{"S":"total"}}' > ../frontend/disabled.json
       # Run terraform deployment
       - name: Terraform Deployment
         run: |

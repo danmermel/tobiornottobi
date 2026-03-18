@@ -1,3 +1,83 @@
+<script setup>
+
+import miner from "../../miner.json"
+import carer from "../../carer.json"
+import careleaver from "../../careleaver.json"
+import disabled from "../../disabled.json"
+import millionaire from "../../millionaire.json"
+import farmer from "../../farmer.json"
+import student from "../../student.json"
+import refugee from "../../refugee.json"
+
+const headers = [
+    {
+      align: 'center',
+      key: 'name',
+      sortable: false,
+      title: 'Profile',
+    },
+    { align: 'center', key: 'yes', title: 'Yes' },
+    { align: 'center', key: 'no', title: 'No' }
+  ]
+const results = ref([
+  {
+    "name": "miner",
+    "yes": parseInt(miner.Items[0].yes.N),
+    "no": parseInt(miner.Items[0].no.N)
+  },
+  {
+    "name": "student",
+    "yes": parseInt(student.Items[0].yes.N),
+    "no": parseInt(student.Items[0].no.N)
+  },
+  {
+    "name": "carer",
+    "yes": parseInt(carer.Items[0].yes.N),
+    "no": parseInt(carer.Items[0].no.N)
+  },
+  {
+    "name": "careleaver",
+    "yes": parseInt(careleaver.Items[0].yes.N),
+    "no": parseInt(careleaver.Items[0].no.N)
+  },
+  {
+    "name": "farmer",
+    "yes": parseInt(farmer.Items[0].yes.N),
+    "no": parseInt(farmer.Items[0].no.N)
+  },
+  {
+    "name": "disabled",
+    "yes": parseInt(disabled.Items[0].yes.N),
+    "no": parseInt(disabled.Items[0].no.N)
+  },
+  {
+    "name": "refugee",
+    "yes": parseInt(refugee.Items[0].yes.N),
+    "no": parseInt(refugee.Items[0].no.N)
+  },
+  {
+    "name": "millionaire",
+    "yes": parseInt(millionaire.Items[0].yes.N),
+    "no": parseInt(millionaire.Items[0].no.N)
+  }
+])
+
+console.log(results)
+</script>
+
+<style>
+.tableclass {
+  border:1px solid black ; 
+  margin-top:20px; 
+  margin-bottom: 20px;
+}
+
+.v-data-table-header__content {
+  font-weight: bold;
+}
+
+</style>
+
 <template>
   <v-container>
     <div class="pb-2">
@@ -14,9 +94,8 @@
       </v-col>
       <v-col class="mb-4">
         <h1 class="text-h3 font-weight-bold mb-3">Thank you for voting!</h1>
-
-        <p class="subheading font-weight-regular">
-          Stay tuned for results! </p>
+        <h3>The results so far (updated every 24 hours)</h3>
+          <v-data-table class="tableclass" hide-default-footer :headers="headers" :items="results"></v-data-table>
         <v-btn href="https://forms.gle/VVTP6pkSHE83b31n8" target="_blank">What did you think of this quiz?
         </v-btn>
       </v-col>

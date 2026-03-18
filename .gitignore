@@ -9,6 +9,7 @@ terraform.tfvars
 terraform.tfstate
 terraform/terraform.tfstate.backup
 config.json
+frontend/*.json
 
 # Nuxt dev/build outputs
 .output
