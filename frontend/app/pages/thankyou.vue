@@ -21,48 +21,48 @@ const headers = [
   ]
 const results = ref([
   {
-    "name": "miner",
+    "name": "Miner",
     "yes": parseInt(miner.Items[0].yes.N),
     "no": parseInt(miner.Items[0].no.N)
   },
   {
-    "name": "student",
+    "name": "Student",
     "yes": parseInt(student.Items[0].yes.N),
     "no": parseInt(student.Items[0].no.N)
   },
   {
-    "name": "carer",
+    "name": "Carer",
     "yes": parseInt(carer.Items[0].yes.N),
     "no": parseInt(carer.Items[0].no.N)
   },
   {
-    "name": "careleaver",
+    "name": "Care Leaver",
     "yes": parseInt(careleaver.Items[0].yes.N),
     "no": parseInt(careleaver.Items[0].no.N)
   },
   {
-    "name": "farmer",
+    "name": "Farmer",
     "yes": parseInt(farmer.Items[0].yes.N),
     "no": parseInt(farmer.Items[0].no.N)
   },
   {
-    "name": "disabled",
+    "name": "Disabled person",
     "yes": parseInt(disabled.Items[0].yes.N),
     "no": parseInt(disabled.Items[0].no.N)
   },
   {
-    "name": "refugee",
+    "name": "Refugee",
     "yes": parseInt(refugee.Items[0].yes.N),
     "no": parseInt(refugee.Items[0].no.N)
   },
   {
-    "name": "millionaire",
+    "name": "Millionaire",
     "yes": parseInt(millionaire.Items[0].yes.N),
     "no": parseInt(millionaire.Items[0].no.N)
   }
 ])
 
-console.log(results)
+//console.log(results)
 </script>
 
 <style>

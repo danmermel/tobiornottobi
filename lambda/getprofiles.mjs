@@ -15,6 +15,14 @@ const TABLE = process.env.TABLE
 
 const HEADERS = { "Content-type": "application/json" }
 
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array
+}
+
 export const handler = async (event) => {
 
 
@@ -36,7 +44,7 @@ export const handler = async (event) => {
   response = await ddbDocClient.send(command)
 
   if (response.$metadata.httpStatusCode === 200) {
-    return { statusCode: 200, headers: HEADERS, body: JSON.stringify({ "ok": true, "message": response.Items }) }
+    return { statusCode: 200, headers: HEADERS, body: JSON.stringify({ "ok": true, "message": shuffleArray(response.Items) }) }
   } else {
     console.log(response)
     return { statusCode: 500, headers: HEADERS, body: JSON.stringify({ "ok": false, "message": "Error Retrieving Profiles" }) }
